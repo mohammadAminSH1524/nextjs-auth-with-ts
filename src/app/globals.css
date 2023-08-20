@@ -2,26 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    /* purple */
+    --primaryText: 104 112 250;
+    /* black */
+    --secondaryText: 20 20 20;
+    --primaryBackground: 252 252 252;
+    --inputBackground: 237 237 237;
+    --error: 211 47 47;
+  }
+  :root[class~="dark"] {
+    /* green */
+    --primaryText: 76 206 172;
+    /* gray [100] */
+    --secondaryText: 224 224 224;
+    --primaryBackground: 20 27 45;
+    --inputBackground: 41 48 64;
+    --error: 244 67 54;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  
+}
+
+*::after,
+*::before {
+  box-sizing: border-box;
 }
