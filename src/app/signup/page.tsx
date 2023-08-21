@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function Signup() {
   const router = useRouter();
@@ -13,11 +14,18 @@ export default function Signup() {
     username: "",
   });
 
-  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+  const onSignup = async () => {
+    try {
+      const response = await axios.post("/api/users/signup", user);
+      console.log("Signup success", response.data);
+      router.push("/profile");
+    } catch (error: any) {
+      console.log("Signup failed", error.message);
+      toast.error(error.message);
+    }
+  };
 
-  console.log(router);
-
-  const onSignup = async () => {};
+  console.log(user);
   return (
     <div
       className="flex flex-col items-center 
