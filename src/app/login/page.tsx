@@ -4,15 +4,29 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export default function Login() {
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
   console.log(user);
 
-  const onLogin = async () => {};
+  const onLogin = async () => {
+    try {
+      const response = await axios.post("/api/users/login", user);
+      console.log("login success", response.data);
+      toast.success("login success")
+      router.push("/profile");
+
+    } catch (error: any) {
+      console.log("loggin failed", error.message);
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div
       className="flex flex-col items-center 
@@ -51,7 +65,7 @@ export default function Login() {
         className="bg-blue-500 hover:bg-blue-700 text-white
        font-bold py-2 px-4 rounded"
       >
-       Login
+        Login
       </button>
       <Link href="/signup">visit signup page</Link>
     </div>
